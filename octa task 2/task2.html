@@ -1,0 +1,107 @@
+[8:14 AM, 5/20/2024] Bijay😎: <!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width,initial-scale-1">
+    <title>ToDo-List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div class="container">
+    <div class="todo-app">
+        <h2>To-Do List<img src="icon.png"></h2>
+        <div class="row">
+            <input type="text" id="input-box" placeholder="add your text">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="list-container">
+            <!-- <li class="checked">Task 1</li>
+            <li>Task 2</li>
+            <li>task 3</li> -->
+        </ul>
+    </div>
+ </div>   
+ <script src="script.js"></script>
+</body>    
+    </head>
+</html>
+[8:14 AM, 5/20/2024] Bijay😎: *{
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    box-sizing:border-box;
+}
+.container{
+    width:100%;
+    min-height:100vh;
+    background:linear-gradient(135deg,#153677,#4e085f);
+    padding:10px;
+}
+.todo-app{
+    width:100%;
+    max-width:540px;
+    background:white;
+    margin:100px auto 20px;
+    padding:40px 30px 70px;
+    border-radius:10px;
+}
+.todo-app h2{
+    color:#002765;
+    display:flex;
+    align-items:center;
+    margin-left:10px
+}
+.todo-app h2img{
+    width:30px;
+    margin-left:10px;
+}
+.row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#edeef0;
+    border-radius:30px;
+    padding-left:20px;
+    margin-bottom:25px;
+
+
+}
+input{
+    flex:1;
+    border:none;
+    outline:none;
+…}
+[8:14 AM, 5/20/2024] Bijay😎: const inputBox=document.getElementById("input-box");
+const listcontainer=document.getElementById("list-container");
+function addTask(){
+    if(inputBox.value ===''){
+        alert("You Must write something!")
+    }
+    else{
+        let li=document.createElement("li");
+        li.innerHTML=inputBox.value;
+        listcontainer.appendChild(li);
+        let span=document.createElement("span");
+        span.innerHTML="\u00d7";
+        li.appendChild(span);
+    }
+    inputBox.value="";
+    saveData();
+}
+listcontainer.addEventListener("click",function(e){
+    if(e.target.tagName ==="LI"){
+        e.target.classList.toggle("checked");
+        saveData();
+
+    }
+    else if(e.target.tagName ==="SPAN"){
+        e.target.parentElement.remove();
+        saveData();
+    }
+},false);
+function saveData(){
+    localStorage.setItem("data",listcontainer.innerHTML);
+}
+function showTask(){
+    listcontainer.innerHTML=localStorage.getItem("data");
+}
+showTask();
